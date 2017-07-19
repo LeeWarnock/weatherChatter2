@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const request = require('request');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,3 +32,25 @@ app.post('/webhook', (req, res) => {
     res.status(200).end();
   }
 });
+
+// Send Message
+function sendMessage(event) {
+  let sender = event.sender.id;
+  let text = event.message.text;
+
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token: EAAJnVnDoQkMBAP0RmtpRZA0sNeKVzmIGPlqTfu3jYiTvx1WuEZChdBKjKkGZCdk0uIApv1pJC4Mv7fOLqkRuTUtkf94Fa289V2P1hRpso3KrUzZAcLfjhorqSZBzrVAcQg0hljmmGhjypSL6O7B4dV2sIfB58X0qLNuFHs7hvgAZDZD},
+    method: 'POST',
+    json: {
+      recipient: {id: sender},
+      message: {text: text}
+    }
+  }, function (error, response) {
+    if (error) {
+        console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+    }
+  });
+}
