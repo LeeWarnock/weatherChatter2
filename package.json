@@ -1,0 +1,23 @@
+{
+  "name": "weatherchatter2",
+  "version": "1.0.0",
+  "description": "node and api.ai version of weatherchatter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeWarnock/weatherChatter2.git"
+  },
+  "author": "Lee Warnock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeeWarnock/weatherChatter2/issues"
+  },
+  "homepage": "https://github.com/LeeWarnock/weatherChatter2#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}
