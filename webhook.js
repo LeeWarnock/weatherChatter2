@@ -12,8 +12,10 @@ const server = app.listen(process.env.PORT || 5000, () => {
 //Replace the'/' below with proper relative link or absolute link if serving fron the internet
 app.get('/', (req, res) => {
   if (req.query['hub.mode'] && req.query['hub.verify_token'] === 'tinykittycats') {
+    console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
     res.status(403).end();
   }
 });
@@ -43,7 +45,7 @@ function sendMessage(event) {
 
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: EAAJnVnDoQkMBANJNQAGNCZB3rdBxwevDtTbzyKl7CDkAQTvdon6GquWIDpNzdJRCek9uzK4kaLEInSy91qxspxxVqcHZCjpZAuQC5WA1u1hwwX5b5AnmVlpfefIZBXSVUUHYcGGqnkZCzqvVYETeZCafjtyZCVWAZBNbYmlKGSFUfAZDZD},
+    qs: {access_token: EAAJnVnDoQkMBAJAnM7Sie0ueiEEKHrY7M3HyZBGR7lWyR6NOPKhcfgbjOM73ZApD3l1DZAoIYqLHQhd65Eb9NA6uZCFO2ymfFbvN8JPeTGQf9w4quZArfZBcK4yLZCALMCZAXzLY84senQTOWlOeJOAgH49rZBdOMJmfoTpdxpsWO9AZDZD},
     method: 'POST',
     json: {
       recipient: {id: sender},
