@@ -43,22 +43,19 @@ function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
 
-  console.log('*** RECEIVED ***');
-  console.log(event);
-
-request({
-  url: 'https://graph.facebook.com/v2.6/me/messages',
-  qs: {access_token: EAAJnVnDoQkMBAJNiml1HTQ2HyVp5qS3STcugocmOCCjLNd8Cm5rTwYAZC86tLGfvBMEUUMnWDk8rhdPWrvNhsvHJEPzxJTfYoR4ywQ7c20BMNjoVNcdPiG7F4WCejRQyNfZC8j2oWnnf5FbbONOP563f0sNrKENFhYT9TYZBQZDZD},
-  method: 'POST',
-  json: {
-    recipient: {id: sender},
-    message: {text: text}
-  }
-}, function (error, response) {
-  if (error) {
-      console.log('Error sending message: ', error);
-  } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-  }
-});
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token: EAAJnVnDoQkMBAALk7VHjrMB2q2eqSGudWv82vAzV4VuV7Omv5MyWyjWgJfC0v7z7NLnGqttQKZCBb4QpNMML9AaqSXw2lDZBZALXOXSSuGKWSDMYRFh9pQLUtCSuD9WaOWTTxo94g6SmXT0ZCXbpvmvDNWZAREUcZD},
+    method: 'POST',
+    json: {
+      recipient: {id: sender},
+      message: {text: text}
+    }
+  }, function (error, response) {
+    if (error) {
+        console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+    }
+  });
 }
