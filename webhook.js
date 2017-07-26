@@ -40,15 +40,15 @@ app.post('/', (req, res) => {
 
 //POST reply with an echo of whatever was entered into chat field
 function sendMessage(event) {
-let sender = event.sender.id;
-let text = event.message.text;
-//
-console.log('*** RECEIVED ***');
-console.log(event);
-//
+  let sender = event.sender.id;
+  let text = event.message.text;
+
+  console.log('*** RECEIVED ***');
+  console.log(event);
+
 request({
   url: 'https://graph.facebook.com/v2.6/me/messages',
-  qs: {access_token: PAGE_ACCESS_TOKEN},
+  qs: {access_token: EAAJnVnDoQkMBAJNiml1HTQ2HyVp5qS3STcugocmOCCjLNd8Cm5rTwYAZC86tLGfvBMEUUMnWDk8rhdPWrvNhsvHJEPzxJTfYoR4ywQ7c20BMNjoVNcdPiG7F4WCejRQyNfZC8j2oWnnf5FbbONOP563f0sNrKENFhYT9TYZBQZDZD},
   method: 'POST',
   json: {
     recipient: {id: sender},
