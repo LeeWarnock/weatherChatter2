@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('request');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,25 +39,26 @@ app.post('/', (req, res) => {
 });
 
 //POST reply with an echo of whatever was entered into chat field
-const request = require('request');
-
 function sendMessage(event) {
-  let sender = event.sender.id;
-  let text = event.message.text;
-
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: EAAJnVnDoQkMBAJAnM7Sie0ueiEEKHrY7M3HyZBGR7lWyR6NOPKhcfgbjOM73ZApD3l1DZAoIYqLHQhd65Eb9NA6uZCFO2ymfFbvN8JPeTGQf9w4quZArfZBcK4yLZCALMCZAXzLY84senQTOWlOeJOAgH49rZBdOMJmfoTpdxpsWO9AZDZD},
-    method: 'POST',
-    json: {
-      recipient: {id: sender},
-      message: {text: text}
-    }
-  }, function (error, response) {
-    if (error) {
-        console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
-    }
-  });
+let sender = event.sender.id;
+let text = event.message.text;
+//
+console.log('*** RECEIVED ***');
+console.log(event);
+//
+request({
+  url: 'https://graph.facebook.com/v2.6/me/messages',
+  qs: {access_token: PAGE_ACCESS_TOKEN},
+  method: 'POST',
+  json: {
+    recipient: {id: sender},
+    message: {text: text}
+  }
+}, function (error, response) {
+  if (error) {
+      console.log('Error sending message: ', error);
+  } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+  }
+});
 }
