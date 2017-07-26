@@ -9,7 +9,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
 });
 
 /* For Facebook Validation */
-app.get('/webhook', (req, res) => {
+app.get('/', (req, res) => {
   if (req.query['hub.mode'] && req.query['hub.verify_token'] === 'tinykittycats') {
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -18,7 +18,7 @@ app.get('/webhook', (req, res) => {
 });
 
 /* Handling all messenges */
-app.post('/webhook', (req, res) => {
+app.post('/', (req, res) => {
   console.log(req.body);
   if (req.body.object === 'page') {
     req.body.entry.forEach((entry) => {
