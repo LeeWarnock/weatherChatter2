@@ -9,6 +9,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
 });
 
 /* For Facebook Validation */
+//Replace the'/' below with proper relative link or absolute link if serving fron the internet
 app.get('/', (req, res) => {
   if (req.query['hub.mode'] && req.query['hub.verify_token'] === 'tinykittycats') {
     res.status(200).send(req.query['hub.challenge']);
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 /* Handling all messenges */
+//Replace the'/' below with proper relative link or absolute link if serving fron the internet
 app.post('/', (req, res) => {
   console.log(req.body);
   if (req.body.object === 'page') {
